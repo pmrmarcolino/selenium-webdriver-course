@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +11,18 @@ import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
 
+    private WebDriver navegador;
+
+    @Before
+    public void setUp(){
+        System.setProperty("webdriver.chrome.driver","/home/usertqi/Ambiente/udemy/drivers/chromedriver");
+        navegador = new ChromeDriver();
+        navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
     @Test
     public void testAdicionarUmaInfoAdicionalUsuario(){
-        System.setProperty("webdriver.chrome.driver","/home/usertqi/Ambiente/udemy/drivers/chromedriver");
-        WebDriver navegador = new ChromeDriver();
-        navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
 
         navegador.get("http://www.juliodelima.com.br/taskit");
         navegador.findElement(By.linkText("Sign in")).click();
@@ -22,5 +32,11 @@ public class InformacoesUsuarioTest {
         String login = navegador.findElement(By.className("me")).getText();
 
         assertEquals("Hi, Julio",login);
+
+    }
+
+    @After
+    public void tearDown(){
+        navegador.quit();
     }
 }
