@@ -1,8 +1,12 @@
+package tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,12 +14,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import suporte.Screenshot;
+import suporte.Gerador;
 
 import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;
+
+    @Rule
+    public TestName test = new TestName();
 
     @Before
     public void setUp(){
@@ -54,10 +63,9 @@ public class InformacoesUsuarioTest {
 
     @Test
     public void removerUmContatoDeUsuario(){
-        //+551199999999
         // following-sibling, é usado para identificar a proxima tag a, depois do span especificado.
         // palavras chave: following e preceding
-        navegador.findElement(By.xpath("//span[text()='+5521999999999']/following-sibling::a")).click();
+        navegador.findElement(By.xpath("//span[text()='+553411111111']/following-sibling::a")).click();
 
         // janela javascript
         navegador.switchTo().alert().accept();
@@ -65,6 +73,9 @@ public class InformacoesUsuarioTest {
         WebElement pop = navegador.findElement(By.id("toast-container"));
         String mensagem = pop.getText();
         assertEquals("Rest in peace, dear phone!",mensagem);
+
+        String arquivoScreenshot = "/home/usertqi/Ambiente/udemy/screenshot" + Gerador.dataHoraParaArquivo() + test.getMethodName() + ".png";
+        Screenshot.tirar(navegador, arquivoScreenshot);
 
         // espera explicita, até que o elemento pop "staleness" da tela
         WebDriverWait aguardar = new WebDriverWait(navegador, 10);
