@@ -35,7 +35,7 @@ public class InformacoesUsuarioTest {
     @DataLoader()
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver","/home/usertqi/Ambiente/udemy/drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver","/home/usertqi/Ambiente/drivers/chromedriver");
         navegador = new ChromeDriver();
         navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
@@ -81,7 +81,7 @@ public class InformacoesUsuarioTest {
         String mensagem = pop.getText();
         assertEquals("Rest in peace, dear phone!",mensagem);
 
-        String arquivoScreenshot = "/home/usertqi/Ambiente/udemy/screenshot" + Gerador.dataHoraParaArquivo() + test.getMethodName() + ".png";
+        String arquivoScreenshot = "/home/usertqi/Ambiente/screenshot" + Gerador.dataHraParaArquivo() + test.getMethodName() + ".png";
         Screenshot.tirar(navegador, arquivoScreenshot);
 
         // espera explicita, até que o elemento pop "staleness" da tela
