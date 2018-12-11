@@ -25,7 +25,7 @@ import suporte.Web;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(DataDrivenTestRunner.class)
-@DataLoader(filePaths = "src/test/resource/teste.csv")
+//@DataLoader(filePaths = "src/test/resource/testeInfo.csv")
 public class InformacoesUsuarioTest {
 
     private WebDriver navegador;

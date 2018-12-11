@@ -1,12 +1,23 @@
 package tests;
 
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.annotation.Param;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import suporte.Web;
 
+import static org.junit.Assert.assertEquals;
+
+
+@RunWith(DataDrivenTestRunner.class)
+@DataLoader(filePaths = "src/test/resource/teste.csv")
 public class InformacoesUsuarioPageObjectTest {
     private WebDriver navegador;
 
@@ -16,13 +27,23 @@ public class InformacoesUsuarioPageObjectTest {
     }
 
     @Test
-    public void testAdicionarUmaInfoAdicionalUsuario(){
-        new LoginPage(navegador).
+    public void testAdicionarUmaInfoAdicionalUsuario(
+            @Param(name = "login") String login,
+            @Param(name = "senha") String senha,
+            @Param(name = "tipo") String tipo,
+            @Param(name = "contato") String contato,
+            @Param(name = "mensagem") String mensagem){
+
+        String mensagemEsperada =
+                new LoginPage(navegador).
                 clickSignIn().
-                fazerLogin("julio0001", "123456").
+                fazerLogin(login, senha).
                 clickMe().
                 clickNaAbaMoreDataAbout().
-                clicarNoBotaoAddMoreDataAbout();
+                clicarNoBotaoAddMoreDataAbout().
+                adicionarSalvar(tipo,contato).
+                capturarTextoToast();
+        assertEquals(mensagemEsperada,mensagem);
 
     }
 
