@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import suporte.Screenshot;
 import suporte.Gerador;
+import suporte.Web;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,11 +36,8 @@ public class InformacoesUsuarioTest {
     @DataLoader()
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver","/home/usertqi/Ambiente/drivers/chromedriver");
-        navegador = new ChromeDriver();
-        navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        navegador.get("http://www.juliodelima.com.br/taskit");
+        navegador = Web.createChrome();
         navegador.findElement(By.linkText("Sign in")).click();
         navegador.findElement(By.id("signinbox")).findElement(By.name("login")).sendKeys("julio0001");
         navegador.findElement(By.id("signinbox")).findElement(By.name("password")).sendKeys("123456");
@@ -72,7 +70,7 @@ public class InformacoesUsuarioTest {
     public void removerUmContatoDeUsuario(){
         // following-sibling, é usado para identificar a proxima tag a, depois do span especificado.
         // palavras chave: following e preceding
-        navegador.findElement(By.xpath("//span[text()='+553411111111']/following-sibling::a")).click();
+        navegador.findElement(By.xpath("//span[text()='+5511999999999']/following-sibling::a")).click();
 
         // janela javascript
         navegador.switchTo().alert().accept();
@@ -91,8 +89,4 @@ public class InformacoesUsuarioTest {
         navegador.findElement(By.linkText("Logout")).click();
     }
 
-    @After
-    public void tearDown(){
-        navegador.quit();
-    }
 }
