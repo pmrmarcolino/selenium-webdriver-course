@@ -5,9 +5,7 @@ import org.easetech.easytest.annotation.Param;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
@@ -17,8 +15,8 @@ import static org.junit.Assert.assertEquals;
 
 
 @RunWith(DataDrivenTestRunner.class)
-@DataLoader(filePaths = "src/test/resource/teste.csv")
-public class InformacoesUsuarioPageObjectTest {
+@DataLoader(filePaths="src/test/resource/TestUser.csv")
+public class TestUser {
     private WebDriver navegador;
 
     @Before
@@ -27,24 +25,24 @@ public class InformacoesUsuarioPageObjectTest {
     }
 
     @Test
-    public void testAdicionarUmaInfoAdicionalUsuario(
+    public void testAddInfo(
             @Param(name = "login") String login,
-            @Param(name = "senha") String senha,
-            @Param(name = "tipo") String tipo,
-            @Param(name = "contato") String contato,
-            @Param(name = "mensagem") String mensagem){
+            @Param(name = "password") String password,
+            @Param(name = "type") String type,
+            @Param(name = "contact") String contact,
+            @Param(name = "message") String message){
 
         String mensagemEsperada =
                 new LoginPage(navegador).
-                clickSignIn().
-                fazerLogin(login, senha).
-                clickMe().
-                clickNaAbaMoreDataAbout().
-                clicarNoBotaoAddMoreDataAbout().
-                adicionarSalvar(tipo,contato).
-                capturarTextoToast();
-        assertEquals(mensagemEsperada,mensagem);
+                        clickSignIn().
+                        fazerLogin(login, password).
+                        clickMe().
+                        clickNaAbaMoreDataAbout().
+                        clicarNoBotaoAddMoreDataAbout().
+                        adicionarSalvar(type ,contact).
+                        capturarTextoToast();
 
+        assertEquals(mensagemEsperada,message);
     }
 
     @After
