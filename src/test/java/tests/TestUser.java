@@ -50,3 +50,5 @@ public class TestUser {
         navegador.quit();
     }
 }
+
+// Comand: mvn clean test -Dtest=tests.TestUser

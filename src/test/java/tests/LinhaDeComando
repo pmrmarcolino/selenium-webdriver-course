@@ -1,0 +1,6 @@
+Para executar os testes por linha de comando, deve:
+ 1. ser instalado o maven
+ 2. Estar com o terminal aberto na pasta que contém o pom.xml do projeto
+ 3. Digitar o comando "$mvn clean test -Dtest=tests.TestUser" para o teste de uma classe especifica
+ ou "mvn clean test" para todas as classes do projeto
+
